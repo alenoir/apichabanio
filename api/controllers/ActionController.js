@@ -10,6 +10,13 @@ var request = require('request')
   , moment = require('moment');
 
 module.exports = {
+  index: function (req, res) {
+    Action.find().sort('date_action DESC')
+      .exec(function(err, actions) {
+        return res.json(actions);
+      });
+  },
+
 	parse: function (req, res) {
     var i=0;
     var url = 'http://www.lacub.fr/circulation/pont-chaban-delmas-previsions-de-fermetures-a-la-circulation';
@@ -112,7 +119,7 @@ module.exports = {
             beggin: finalDates[i].beggin,
             end: finalDates[i].end
           }).exec(function(res, action){
-            console.log(res);
+            //console.log(res);
           });
         }
       }
