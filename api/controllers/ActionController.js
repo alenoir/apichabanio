@@ -17,6 +17,18 @@ module.exports = {
       });
   },
 
+  search: function (req, res) {
+    var date = req.param('date');
+
+    Action.find({
+      date_action: date
+    })
+    .sort('date_action DESC')
+    .exec(function(err, actions) {
+      return res.json(actions);
+    });
+  },
+
 	parse: function (req, res) {
     var i=0;
     var url = 'http://www.lacub.fr/circulation/pont-chaban-delmas-previsions-de-fermetures-a-la-circulation';
