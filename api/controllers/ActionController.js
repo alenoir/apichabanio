@@ -18,10 +18,10 @@ module.exports = {
   },
 
   search: function (req, res) {
-    var date = req.param('date');
+    var search = req.param('q');
 
     Action.find({
-      date_action: date
+      date_action: search.date
     })
     .sort('date_action DESC')
     .exec(function(err, actions) {
@@ -118,21 +118,22 @@ module.exports = {
       for(i=0;i<finalDates.length;i++) {
         if(finalDates[i] != undefined) {
           var action = finalDates[i];
-          //console.log(finalDates[i]);
-          Action.findOrCreate({
-            boat_name: finalDates[i].boat_name,
-            date_action: finalDates[i].date_action,
-            beggin: finalDates[i].beggin,
-            end: finalDates[i].end
-          },
-          {
-            boat_name: finalDates[i].boat_name,
-            date_action: finalDates[i].date_action,
-            beggin: finalDates[i].beggin,
-            end: finalDates[i].end
+          console.log(finalDates[i].boat_name);
+          Action.find({
+            boat_name: finalDates[i].boat_name
           }).exec(function(res, action){
-            //console.log(res);
+            if(action == undefined) {
+              Action.create({
+                boat_name: finalDates[i].boat_name,
+                date_action: finalDates[i].date_action,
+                beggin: finalDates[i].beggin,
+                end: finalDates[i].end
+              }).exec(function(res, action){
+                //console.log(res);
+              });
+            }
           });
+          
         }
       }
       
