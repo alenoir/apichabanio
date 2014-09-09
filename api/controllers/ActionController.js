@@ -18,14 +18,37 @@ module.exports = {
   },
 
   search: function (req, res) {
-    var search = req.param('q');
-
+    var search = JSON.parse(req.param('q'));
     Action.find({
       date_action: search.date
     })
     .sort('date_action DESC')
     .exec(function(err, actions) {
       return res.json(actions);
+    });
+  },
+
+  statenow: function (req, res) {
+    //var datenow = new Date(moment('2014-10-04 16:00'));
+    var datenow = new Date(moment());
+    var response = {};
+    Action.findOne({
+      beggin: {'<=' : datenow},
+      end: {'>=' : datenow}
+    })
+    .sort('date_action DESC')
+    .exec(function(err, action) {
+      if(action == undefined) {
+        response.state = 'opened';
+      }
+      else {
+        response.state = 'closed';
+        response.boatNames = action.boat_name.split(' - ');
+        response.beggin = action.beggin;
+        response.end = action.end;
+        response.time_close = action.time_close;
+      }
+      return res.json(response);
     });
   },
 
@@ -118,20 +141,29 @@ module.exports = {
       for(i=0;i<finalDates.length;i++) {
         if(finalDates[i] != undefined) {
           var action = finalDates[i];
+          var begginDate = moment(finalDates[i].beggin);
+          var endDate = moment(finalDates[i].end);
+          var diffSec = endDate.diff(begginDate);
+          var time_top = new Date(begginDate.add('minutes', 11));
+          var time_bottom = new Date(endDate.subtract('minutes', 11));
+
           console.log(finalDates[i].boat_name);
-          Action.find({
-            boat_name: finalDates[i].boat_name
+          Action.findOrCreate({
+            boat_name: finalDates[i].boat_name,
+            date_action: finalDates[i].date_action,
+            beggin: finalDates[i].beggin,
+            end: finalDates[i].end
+          },
+          {
+            boat_name: finalDates[i].boat_name,
+            date_action: finalDates[i].date_action,
+            beggin: finalDates[i].beggin,
+            end: finalDates[i].end,
+            time_close: diffSec,
+            time_top: time_top,
+            time_bottom: time_bottom
           }).exec(function(res, action){
-            if(action == undefined) {
-              Action.create({
-                boat_name: finalDates[i].boat_name,
-                date_action: finalDates[i].date_action,
-                beggin: finalDates[i].beggin,
-                end: finalDates[i].end
-              }).exec(function(res, action){
-                //console.log(res);
-              });
-            }
+            console.log(res);
           });
           
         }
