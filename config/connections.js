@@ -60,7 +60,7 @@ module.exports.connections = {
 
   mongodbHQ: {
     adapter: 'sails-mongo',
-    host: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
+    url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
   },
 
   /***************************************************************************
