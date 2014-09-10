@@ -1,8 +1,8 @@
 {
   "name": "chaban.io",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
+  "version": "0.0.1",
+  "description": "Le pont Chaban Delams est-il ouvert ?",
   "keywords": [],
   "dependencies": {
     "cheerio": "^0.17.0",
@@ -38,6 +38,6 @@
     "type": "git",
     "url": "git://github.com/antoinelenoir/chaban.io.git"
   },
-  "author": "antoinelenoir",
+  "author": "alenoir",
   "license": ""
 }
