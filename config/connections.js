@@ -67,7 +67,6 @@ module.exports.connections = {
 
   mongodbHQ: {
     adapter: 'sails-mongo',
-    schema: 'true',
     url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
   },
 
@@ -80,7 +79,7 @@ module.exports.connections = {
   *                                                                          *
   *                                                                          *
   ***************************************************************************/
-  
+
   somePostgresqlServer: {
     adapter: 'sails-postgresql',
     host: 'YOUR_POSTGRES_SERVER_HOSTNAME_OR_IP_ADDRESS',
