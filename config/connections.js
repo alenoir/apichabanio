@@ -62,13 +62,12 @@ module.exports.connections = {
     port: 27017,
     // user: 'username',
     // password: 'password',
-    database: 'chabani'
+    database: 'chabanio'
   },
 
   mongodbHQ: {
     adapter: 'sails-mongo',
     schema: 'true',
-    //url: 'mongodb://apichabanio:fvavoe2t@ds063879.mongolab.com:63879/heroku_app29321820'
     url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
   },
 
