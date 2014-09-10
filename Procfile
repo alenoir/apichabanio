@@ -1,1 +1,1 @@
-web: NODE_ENV=production node app.js -x -- --prod
+web: node app.js --prod
