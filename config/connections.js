@@ -56,19 +56,18 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
+  // someMongodbServer: {
+  //   adapter: 'sails-mongo',
+  //   host: 'localhost',
+  //   port: 27017,
+  //   // user: 'username',
+  //   // password: 'password',
+  //   database: 'chabanio'
+  // },
 
   mongodbHQ: {
     adapter: 'sails-mongo',
     url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
-  },
-
-  someMongodbServer: {
-    adapter: 'sails-mongo',
-    host: 'localhost',
-    port: 27017,
-    // user: 'username',
-    // password: 'password',
-    database: 'chabanio'
   },
 
   /***************************************************************************
