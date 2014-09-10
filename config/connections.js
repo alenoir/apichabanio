@@ -65,6 +65,11 @@ module.exports.connections = {
     database: 'chabani'
   },
 
+  mongodbHQ: {
+    adapter: 'sails-mongo',
+    url: process.env.MONGOHQ_URL
+  },
+
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *
