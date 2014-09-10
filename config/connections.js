@@ -60,7 +60,10 @@ module.exports.connections = {
   mongodbHQ: {
     adapter: 'sails-mongo',
     host: process.env.MONGOHQ_URL
-  },
+    user: 'heroku',
+    password: '6ac3f17cbfc1f214a337849b81d3a8f8',
+    database: 'apichabanio'
+},
 
   /***************************************************************************
   *                                                                          *
