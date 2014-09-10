@@ -10,13 +10,13 @@ var moment = require('moment');
 module.exports = {
 
   attributes: {
-    boat_name: {
+    boatName: {
       type: 'string'
     },
     date_action: {
       type: 'string'
     },
-    beggin: {
+    begin: {
       type: 'datetime'
     },
     end: {

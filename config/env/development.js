@@ -10,6 +10,7 @@
  *
  */
 
+console.log('dev');
 module.exports = {
 
   /***************************************************************************
@@ -17,7 +18,9 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-    connection: 'someMongodbServer',
+  models: {
+    connection: 'someMongodbServer'
+  }
 
 
 };
