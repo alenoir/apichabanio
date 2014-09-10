@@ -11,7 +11,19 @@ var request = require('request')
 
 module.exports = {
   index: function (req, res) {
-    Action.find().sort('date_action DESC')
+    Action.find().sort('beggin ASC')
+      .exec(function(err, actions) {
+        return res.json(actions);
+      });
+  },
+
+  next: function (req, res) {
+    var datenow = new Date(moment());
+    Action.find().where({
+      beggin: {
+        '>=': datenow
+      }
+    }).sort('beggin ASC')
       .exec(function(err, actions) {
         return res.json(actions);
       });
