@@ -19,14 +19,7 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    someMongodbServer: {
-      adapter: 'sails-mongo',
-      host: 'localhost',
-      port: 27017,
-      // user: 'username',
-      // password: 'password',
-      database: 'chabanio'
-    },
+    connection: 'someMongodbServer'
   }
 
 
