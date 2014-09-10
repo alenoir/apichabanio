@@ -67,7 +67,7 @@ module.exports.connections = {
 
   mongodbHQ: {
     adapter: 'sails-mongo',
-    url: process.env.MONGOHQ_URL
+    host: process.env.MONGOHQ_URL
   },
 
   /***************************************************************************
