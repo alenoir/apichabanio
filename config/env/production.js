@@ -20,7 +20,10 @@ module.exports = {
    ***************************************************************************/
   
   models: {
-    connection: 'mongodbHQ'
+    mongodbHQ: {
+      adapter: 'sails-mongo',
+      url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
+    },
   }
 
   /***************************************************************************
