@@ -22,13 +22,13 @@ module.exports = {
     end: {
       type: 'datetime'
     },
-    time_close: {
+    timeClose: {
       type: 'integer'
     },
-    time_top: {
+    timeTop: {
       type: 'datetime'
     },
-    time_bottom: {
+    timeBottom: {
       type: 'datetime'
     }
   }
