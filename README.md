@@ -1,3 +1,5 @@
 # chaban.io
 
-a [Sails](http://sailsjs.org) application
+An api for Chaban Delmas Bridge
+
+[Documentation](https://github.com/alenoir/apichabanio/wiki)
