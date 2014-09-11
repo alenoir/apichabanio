@@ -17,8 +17,17 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
+  connections: {
+    localMongo: {
+      adapter: 'sails-mongo',
+      host: 'localhost',
+      port: 27017,
+
+      database: 'chabanio'
+    }
+  },
   models: {
-    connection: 'someMongodbServer'
+    connection: 'localMongo'
   }
 
 
