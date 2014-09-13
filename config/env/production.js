@@ -17,15 +17,25 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
   
+  // connections: {
+  //   mongodbHQ: {
+  //     adapter: 'sails-mongo',
+  //     url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
+  //   },
+  // },
+
   connections: {
-    mongodbHQ: {
+    localMongo: {
       adapter: 'sails-mongo',
-      url: 'mongodb://apichabanio:fvavoe2t@lennon.mongohq.com:10019/app29321820'
-    },
+      host: 'localhost',
+      port: 27017,
+
+      database: 'chabanio'
+    }
   },
   
   models: {
-    connection: 'mongodbHQ'
+    connection: 'localMongo'
   }
 
   /***************************************************************************
