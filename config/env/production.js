@@ -27,13 +27,15 @@ module.exports = {
   connections: {
     localMongo: {
       adapter: 'sails-mongo',
-      host: 'localhost',
-      port: 27017,
-
-      database: 'chabanio'
+      host: MONGODB_HOST,
+      port: MONGODB_PORT,
+      username:MONGODB_USERNAME,
+      password:MONGODB_PASSWORD,
+      url:MONGO_URL,
+      database: MONGODB_DATABASE
     }
   },
-  
+
   models: {
     connection: 'localMongo'
   }
