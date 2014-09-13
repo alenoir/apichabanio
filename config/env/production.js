@@ -27,12 +27,12 @@ module.exports = {
   connections: {
     localMongo: {
       adapter: 'sails-mongo',
-      host: MONGODB_HOST,
-      port: MONGODB_PORT,
-      username:MONGODB_USERNAME,
-      password:MONGODB_PASSWORD,
-      url:MONGO_URL,
-      database: MONGODB_DATABASE
+      host: process.env.MONGODB_HOST,
+      port: process.env.MONGODB_PORT,
+      username: process.env.MONGODB_USERNAME,
+      password: process.env.MONGODB_PASSWORD,
+      url: process.env.MONGO_URL,
+      database: process.env.MONGODB_DATABASE
     }
   },
 
