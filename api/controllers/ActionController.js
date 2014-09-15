@@ -64,8 +64,8 @@ module.exports = {
         feed.addItem({
           title:          actions[key].boatName,
           link:           'http://estcequelepontchabanestouvert.fr',
-          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
-          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
           date:           actions[key].beggin
         });
       }
@@ -94,8 +94,8 @@ module.exports = {
         feed.addItem({
           title:          actions[key].boatName,
           link:           'http://estcequelepontchabanestouvert.fr',
-          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
-          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
+          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
           date:           actions[key].beggin
         });
       }
