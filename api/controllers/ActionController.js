@@ -134,7 +134,7 @@ module.exports = {
             year = date_array[2];
             month = date_array[1];
             day = date_array[0];
-            date = moment(year+'/'+month+'/'+day);
+            date = moment(year+'/'+month+'/'+day).zone('+0200');
             singleAction.dateAction = year+'/'+month+'/'+day;
           }
 
@@ -203,6 +203,7 @@ module.exports = {
           var timeTop = new Date(beginDate.add('minutes', 11));
           var timeBottom = new Date(endDate.subtract('minutes', 11));
 
+          console.log(finalDates[i].begin);
           console.log(finalDates[i].boatName);
           Action.findOrCreate({
             boatName: finalDates[i].boatName,
