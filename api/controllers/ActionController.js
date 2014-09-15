@@ -37,7 +37,7 @@ module.exports = {
     })
     .sort('dateAction DESC')
     .exec(function(err, actions) {
-      return res.json(actions); 
+      return res.json(actions);
     });
   },
 
