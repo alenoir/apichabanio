@@ -7,7 +7,8 @@
 
 var request = require('request')
   , cheerio = require('cheerio')
-  , moment = require('moment');
+  , moment = require('moment')
+  , Feed = require('feed');
 
 module.exports = {
   index: function (req, res) {
@@ -35,6 +36,49 @@ module.exports = {
       dateAction: search.date
     })
     .sort('dateAction DESC')
+    .exec(function(err, actions) {
+      return res.json(actions);
+    });
+  },
+
+  todayBoatRss: function (req, res) {
+
+    var feed = new Feed({
+        title:          'Fermeture du pont Chaban Delmas aujourd\'hui',
+        description:    'Fermeture du pont Chaban Delmas aujourd\'hui',
+        link:           'http://estcequelepontchabanestouvert.fr',
+        image:          'estcequelepontchabanestouvert.fr',
+        copyright:      'Copyright © 2014 French Fries Labs. All rights reserved',
+    });
+
+    var date = moment().subtract(8, 'Hours').format('YYYY/MM/DD');
+    console.log(date);
+    Action.find({
+      dateAction: {
+        '<=': date
+      }
+    })
+    .exec(function(err, actions) {
+
+      for(var key in actions) {
+        feed.item({
+          title:          actions[key].boatName,
+          link:           'http://estcequelepontchabanestouvert.fr',
+          description:    'Le pont Chaban Delmas sera fermer aujourd\'hui',
+          date:           actions[key].begginDate
+        });
+      }
+
+      return res.rss(feed.render());
+    });
+  },
+
+  tomorrowBoatRss: function (req, res) {
+    var date = moment().add(4, 'Hours').format('YYYY/MM/DD');
+    console.log(date);
+    Action.find({
+      dateAction: date
+    })
     .exec(function(err, actions) {
       return res.json(actions);
     });

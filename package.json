@@ -8,6 +8,7 @@
     "cheerio": "^0.17.0",
     "deferred": "^0.7.1",
     "ejs": "~0.8.4",
+    "feed": "^0.2.6",
     "grunt": "0.4.2",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.10.1",
