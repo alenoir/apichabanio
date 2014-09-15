@@ -13,7 +13,7 @@ module.exports = {
     boatName: {
       type: 'string'
     },
-    date_action: {
+    dateAction: {
       type: 'string'
     },
     begin: {

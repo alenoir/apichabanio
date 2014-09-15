@@ -44,15 +44,15 @@ module.exports = {
   todayBoatRss: function (req, res) {
 
     var feed = new Feed({
-        title:          'Fermeture du pont Chaban Delmas aujourd\'hui',
-        description:    'Fermeture du pont Chaban Delmas aujourd\'hui',
+        title:          'Fermeture du pont Chaban-Delmas aujourd\'hui',
+        description:    'Grâce à Est-ce que le pont Chaban-Delmas est ouvert ?, vérifiez en un clic l\'ouverture du pont Chaban-Delmas et les prochaines fermetures.',
         link:           'http://estcequelepontchabanestouvert.fr',
-        image:          'estcequelepontchabanestouvert.fr',
+        image:          'estcequelepontchabanestouvert.fr/images/fb_chaban.png',
         copyright:      'Copyright © 2014 French Fries Labs. All rights reserved',
     });
 
     var date = moment().subtract(8, 'Hours').format('YYYY/MM/DD');
-    console.log(date);
+
     Action.find({
       dateAction: {
         '<=': date
@@ -61,27 +61,49 @@ module.exports = {
     .exec(function(err, actions) {
 
       for(var key in actions) {
-        feed.item({
+        feed.addItem({
           title:          actions[key].boatName,
           link:           'http://estcequelepontchabanestouvert.fr',
-          description:    'Le pont Chaban Delmas sera fermer aujourd\'hui',
-          date:           actions[key].begginDate
+          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          date:           actions[key].beggin
         });
       }
 
-      return res.rss(feed.render());
+      return res.header('Content-Type','text/xml').send(feed.render());
     });
   },
 
   tomorrowBoatRss: function (req, res) {
+
+    var feed = new Feed({
+        title:          'Fermeture du pont Chaban-Delmas aujourd\'hui',
+        description:    'Grâce à Est-ce que le pont Chaban-Delmas est ouvert ?, vérifiez en un clic l\'ouverture du pont Chaban-Delmas et les prochaines fermetures.',
+        link:           'http://estcequelepontchabanestouvert.fr',
+        image:          'estcequelepontchabanestouvert.fr/images/fb_chaban.png',
+        copyright:      'Copyright © 2014 French Fries Labs. All rights reserved',
+    });
+
     var date = moment().add(4, 'Hours').format('YYYY/MM/DD');
-    console.log(date);
+
     Action.find({
       dateAction: date
     })
     .exec(function(err, actions) {
-      return res.json(actions);
+      for(var key in actions) {
+        feed.addItem({
+          title:          actions[key].boatName,
+          link:           'http://estcequelepontchabanestouvert.fr',
+          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
+          date:           actions[key].beggin
+        });
+      }
+
+      return res.header('Content-Type','text/xml').send(feed.render());
     });
+
+
   },
 
   statenow: function (req, res) {
