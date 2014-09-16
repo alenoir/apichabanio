@@ -103,7 +103,6 @@ module.exports = {
       return res.header('Content-Type','text/xml').send(feed.render());
     });
 
-
   },
 
   statenow: function (req, res) {
