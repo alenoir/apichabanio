@@ -8,7 +8,8 @@
 var request = require('request')
   , cheerio = require('cheerio')
   , moment = require('moment')
-  , Feed = require('feed');
+  , Feed = require('feed')
+  , fs = require('fs');
 
 module.exports = {
   index: function (req, res) {
@@ -107,8 +108,8 @@ module.exports = {
   },
 
   statenow: function (req, res) {
-    //var datenow = new Date(moment('2014-10-04 16:00'));
-    var datenow = new Date(moment());
+    var datenow = new Date(moment('2014-10-04 16:00'));
+    //var datenow = new Date(moment());
     var response = {};
     Action.findOne({
       begin: {'<=' : datenow},
@@ -127,6 +128,32 @@ module.exports = {
         response.timeClose = action.timeClose;
       }
       return res.json(response);
+    });
+  },
+
+  imgStatenow: function (req, res) {
+    //var datenow = new Date(moment('2014-10-04 16:00'));
+    var datenow = new Date(moment());
+    var response = {};
+    Action.findOne({
+      begin: {'<=' : datenow},
+      end: {'>=' : datenow}
+    })
+    .sort('dateAction DESC')
+    .exec(function(err, action) {
+      if(action == undefined) {
+        res.writeHead(302, {
+          'Location': 'http://estcequelepontchabanestouvert.fr/images/oui.png'
+        });
+        return res.end();
+        
+      }
+      else {
+        es.writeHead(302, {
+          'Location': 'http://estcequelepontchabanestouvert.fr/images/non.png'
+        });
+        return res.end();
+      }
     });
   },
 
