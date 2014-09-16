@@ -131,7 +131,7 @@ module.exports = {
     });
   },
 
-  imgStatenow: function (req, res) {
+  imgstatenow: function (req, res) {
     //var datenow = new Date(moment('2014-10-04 16:00'));
     var datenow = new Date(moment());
     var response = {};
