@@ -41,23 +41,24 @@ module.exports = {
     });
   },
 
-  todayBoatRss: function (req, res) {
+  oneHourBoatRss: function (req, res) {
 
     var feed = new Feed({
-        title:          'Fermeture du pont Chaban-Delmas aujourd\'hui',
+        title:          'Fermeture du pont Chaban-Delmas dans une heure',
         description:    'Grâce à Est-ce que le pont Chaban-Delmas est ouvert ?, vérifiez en un clic l\'ouverture du pont Chaban-Delmas et les prochaines fermetures.',
         link:           'http://estcequelepontchabanestouvert.fr',
         image:          'estcequelepontchabanestouvert.fr/images/fb_chaban.png',
         copyright:      'Copyright © 2014 French Fries Labs. All rights reserved',
     });
 
-    var date = moment().subtract(8, 'Hours').format('YYYY/MM/DD');
-
+    var dateNow = new Date(moment().add(1, 'Hours'));
+    console.log(dateNow);
     Action.find({
-      dateAction: {
-        '<=': date
+      begin: {
+        '<=': dateNow
       }
     })
+    .sort('begin DESC')
     .exec(function(err, actions) {
 
       for(var key in actions) {
@@ -66,7 +67,7 @@ module.exports = {
           link:           'http://estcequelepontchabanestouvert.fr',
           description:    'Le pont Chaban-Delmas sera fermer aujourd\'hui de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
           content:        'Le pont Chaban-Delmas sera fermer aujourd\'hui de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).format('HH[h]mm'),
-          date:           actions[key].beggin
+          date:           actions[key].begin
         });
       }
 
@@ -94,9 +95,9 @@ module.exports = {
         feed.addItem({
           title:          actions[key].boatName,
           link:           'http://estcequelepontchabanestouvert.fr',
-          description:    'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
-          content:        'Le pont Chaban-Delmas sera fermer demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
-          date:           actions[key].beggin
+          description:    'Le pont Chaban-Delmas sera fermé demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
+          content:        'Le pont Chaban-Delmas sera fermé demain de '+moment(actions[key].begin).zone('+0200').format('HH[h]mm')+' à '+moment(actions[key].end).zone('+0200').format('HH[h]mm'),
+          date:           actions[key].begin
         });
       }
 
