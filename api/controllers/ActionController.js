@@ -108,8 +108,10 @@ module.exports = {
   },
 
   statenow: function (req, res) {
-    //var datenow = new Date(moment('2014-10-04 16:00'));
     var datenow = new Date(moment());
+    var datenowOneHour = new Date(moment().add(1, 'hours'));
+    //var datenow = new Date(moment('2014-09-17 11:46'));
+    //var datenowOneHour = new Date(moment('2014-09-17 11:46').add(1, 'hours'));
     var response = {};
     Action.findOne({
       begin: {'<=' : datenow},
@@ -118,7 +120,24 @@ module.exports = {
     .sort('dateAction DESC')
     .exec(function(err, action) {
       if(action == undefined) {
-        response.state = 'opened';
+        Action.findOne({
+          begin: {'<=' : datenowOneHour},
+          end: {'>=' : datenowOneHour}
+        })
+        .sort('dateAction DESC')
+        .exec(function(err, action) {
+          if(action == undefined) {
+            response.state = 'opened';
+          }
+          else {
+            response.state = 'warning';
+            response.boatNames = action.boatName.split(' - ');
+            response.begin = action.begin;
+            response.end = action.end;
+            response.timeClose = action.timeClose;
+          }
+          return res.json(response);
+        });        
       }
       else {
         response.state = 'closed';
@@ -126,8 +145,8 @@ module.exports = {
         response.begin = action.begin;
         response.end = action.end;
         response.timeClose = action.timeClose;
+        return res.json(response);
       }
-      return res.json(response);
     });
   },
 
