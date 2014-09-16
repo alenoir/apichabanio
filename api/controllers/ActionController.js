@@ -108,8 +108,8 @@ module.exports = {
   },
 
   statenow: function (req, res) {
-    var datenow = new Date(moment('2014-10-04 16:00'));
-    //var datenow = new Date(moment());
+    //var datenow = new Date(moment('2014-10-04 16:00'));
+    var datenow = new Date(moment());
     var response = {};
     Action.findOne({
       begin: {'<=' : datenow},
